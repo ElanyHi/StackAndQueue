@@ -1,0 +1,2 @@
+add_executable(sample_structures sample_structures.cpp)
+target_include_directories(sample_structures PRIVATE ../include)
