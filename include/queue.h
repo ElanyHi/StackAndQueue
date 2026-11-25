@@ -8,13 +8,12 @@ private:
     size_t capacity;
     size_t head;
     size_t tail;
-    size_t count; // Текущее количество элементов
+    size_t count; 
 
     void resize() {
         size_t new_capacity = capacity == 0 ? 1 : capacity * 2;
         T* new_data = new T[new_capacity];
         
-        // Разворачиваем кольцо в плоский массив
         for (size_t i = 0; i < count; ++i) {
             new_data[i] = std::move(data[(head + i) % capacity]);
         }
@@ -43,13 +42,13 @@ public:
     void push(const T& value) {
         if (count == capacity) resize();
         data[tail] = value;
-        tail = (tail + 1) % capacity; // Закольцовываем индекс добавления
+        tail = (tail + 1) % capacity; 
         count++;
     }
 
     void pop() {
         if (empty()) throw std::out_of_range("Queue is empty");
-        head = (head + 1) % capacity; // Закольцовываем индекс извлечения
+        head = (head + 1) % capacity; 
         count--;
     }
 

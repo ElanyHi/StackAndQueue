@@ -49,8 +49,7 @@ public:
     MyVector() : n(0), capacity(1), data(new T[1]) {}
 
     MyVector(size_t _size, const T& _value = T())
-        : n(_size), capacity(_size * FACTOR), data(new T[capacity]) {
-        if (capacity == 0) capacity = 1;
+        : n(_size), capacity(_size > 0 ? _size * FACTOR : 1), data(new T[capacity]) {
         for (size_t i = 0; i < n; i++) {
             data[i] = _value;
         }
@@ -116,7 +115,8 @@ public:
         data[pos] = value;
     }
 
-    void erace(size_t pos) {
+    void erase(size_t pos) {
+        if (pos >= n) throw std::out_of_range("Index out of range");
         for (size_t i = pos+1;i<n;i++){
             data[i-1] = data[i];
         }
@@ -168,11 +168,25 @@ public:
         return data[index];
     }
 
-    T& front() { return data[0]; }
-    const T& front() const { return data[0]; }
+    T& front() {
+        if (empty()) throw std::out_of_range("Vector is empty");
+        return data[0];
+    }
 
-    T& back() { return data[n - 1]; }
-    const T& back() const { return data[n - 1]; }
+    const T& front() const {
+        if (empty()) throw std::out_of_range("Vector is empty");
+        return data[0];
+    }
+
+    T& back() {
+        if (empty()) throw std::out_of_range("Vector is empty");
+        return data[n - 1];
+    }
+
+    const T& back() const {
+        if (empty()) throw std::out_of_range("Vector is empty");
+        return data[n - 1];
+    }
 };
 
 

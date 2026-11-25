@@ -36,3 +36,4 @@ inline MyVector<int> run_bfs(const MyVector<MyVector<int>>& graph, int start_v) 
 
     return len;
 }
+//Итого О(V+E)

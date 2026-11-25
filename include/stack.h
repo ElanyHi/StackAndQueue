@@ -10,11 +10,11 @@ private:
         Node(const T& val, Node* nxt = nullptr) : data(val), next(nxt) {}
     };
 
-    Node* top_node;
+    Node* first;
     size_t count;
 
 public:
-    Stack() : top_node(nullptr), count(0) {}
+    Stack() : first(nullptr), count(0) {}
 
     ~Stack() {
         while (!empty()) {
@@ -26,25 +26,25 @@ public:
     Stack& operator=(const Stack&) = delete;
 
     void push(const T& value) {
-        top_node = new Node(value, top_node);
+        first = new Node(value, first);
         count++;
     }
 
     void pop() {
         if (empty()) throw std::out_of_range("Stack is empty");
-        Node* temp = top_node;
-        top_node = top_node->next;
+        Node* temp = first;
+        first = first->next;
         delete temp;
         count--;
     }
 
     T& top() {
         if (empty()) throw std::out_of_range("Stack is empty");
-        return top_node->data;
+        return first->data;
     }
 
     bool empty() const {
-        return top_node == nullptr;
+        return first == nullptr;
     }
 
     size_t size() const {
